@@ -134,6 +134,14 @@ BEGIN
 			WHERE idmascota = _idmascota;
 END $$
 
+DELIMITER $$
+CREATE PROCEDURE spu_clientes_iniciar_sesion(IN _dni CHAR(8))
+BEGIN
+	SELECT *
+		FROM clientes
+		WHERE dni = _dni;
+END $$
+
 /*
 select * from animales;
 select * from razas;
