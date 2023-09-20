@@ -18,4 +18,27 @@ if (isset($_POST['operacion'])) {
     ];
     $cliente->create($data);
   }
+
+  if ($_POST['operacion'] == 'login') {
+    $response = [
+      "login"       => false,
+      "idcliente"   => "",
+      "apellidos"   => "",
+      "nombres"     => ""
+    ];
+
+    $result = $cliente->login($_POST['username']);
+    $passwordInput = $_POST['password'];
+
+    if ($result && password_verify($passwordInput, $result['claveacceso'])) {
+      $response['login'] = true;
+      $response['idcliente'] = $result['idcliente'];
+      $response['apellidos'] = $result['apellidos'];
+      $response['nombres'] = $result['nombres'];
+    } else {
+      $response['message'] = 'Credenciales inválidas';
+    }
+
+    echo json_encode($response);
+  }
 }

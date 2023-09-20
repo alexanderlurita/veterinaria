@@ -22,7 +22,20 @@ class Cliente extends Conexion
           $data['dni'],
           $data['claveacceso']
         )
-      );      
+      );
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function login($username)
+  {
+    try {
+      $query = $this->connection->prepare("CALL spu_clientes_iniciar_sesion(?)");
+      $query->execute(
+        array($username)
+      );
+      return $query->fetch(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
       die($e->getMessage());
     }
