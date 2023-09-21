@@ -7,11 +7,23 @@ $mascota = new Mascota();
 if (isset($_POST['operacion'])) {
 
   if ($_POST['operacion'] == 'add') {
+    $uploadDirectory = "";
+    $uploadedFileName = "";
+    $uploadFilePath = "";
+
+    if ($_POST['fotografia'] != ""){
+      $uploadDirectory = "../images/uploads/";
+      $uploadedFileName = sha1(date('c')) . '.jpg';
+      $uploadFilePath = $uploadDirectory . $uploadedFileName;
+
+      file_put_contents($uploadFilePath, base64_decode($_POST['fotografia']));
+    }
+
     $data = [
       "idcliente"   => $_POST['idcliente'],
       "idraza"      => $_POST['idraza'],
       "nombre"      => $_POST['nombre'],
-      "fotografia"  => $_POST['fotografia'],
+      "fotografia"  => $uploadedFileName,
       "color"       => $_POST['color'],
       "genero"      => $_POST['genero']
     ];

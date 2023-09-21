@@ -59,10 +59,10 @@ INSERT INTO razas (idanimal, nombreraza) VALUES
 	(3, 'Roborowski');
 	
 INSERT INTO mascotas (idcliente, idraza, nombre, fotografia, color, genero) VALUES
-		(1, 2, 'Firulais', '', 'Blanco y negro', 'M'),
-		(1, 4, 'Daisy', '', 'Blanco y marrón oscuro', 'H'),
-		(2, 3, 'Loki', '', 'Gris claro', 'M'),
-		(3, 5, 'Sandy', '', 'Negro y gris claro', 'M');
+		(1, 2, 'Firulais', '0c8e0a697916ff0e283f6cb58e2091a3a4d4df0a.jpg', 'Blanco y negro', 'M'),
+		(1, 4, 'Daisy', '95b3a8a802b8e0db8611d3ec2b994a37486c2584.jpg', 'Blanco y marrón oscuro', 'H'),
+		(2, 3, 'Loki', 'cb4d12e5d8ef3e76d761b82f31fe9f90c3b592a8.jpg', 'Gris claro', 'M'),
+		(3, 5, 'Sandy', 'ec6c78386f3147d199e1af1a4566e3529a4dea5f.jpg', 'Negro y gris claro', 'M');
 		
 	
 -- PROCEDIMIENTOS
