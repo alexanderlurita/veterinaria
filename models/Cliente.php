@@ -40,4 +40,17 @@ class Cliente extends Conexion
       die($e->getMessage());
     }
   }
+
+  public function searchByDNI($dni)
+  {
+    try {
+      $query = $this->connection->prepare("CALL spu_clientes_buscar(?)");
+      $query->execute(
+        array($dni)
+      );
+      return $query->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
 }

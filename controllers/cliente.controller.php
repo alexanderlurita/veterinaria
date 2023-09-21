@@ -42,3 +42,11 @@ if (isset($_POST['operacion'])) {
     echo json_encode($response);
   }
 }
+
+if (isset($_GET['operacion'])) {
+
+  if ($_GET['operacion'] == 'search') {
+    $result = $cliente->searchByDNI($_GET['dni']);
+    echo json_encode($result);
+  }
+}

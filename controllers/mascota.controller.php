@@ -32,4 +32,9 @@ if (isset($_GET['operacion'])) {
 
     echo json_encode($result);
   }
+
+  if ($_GET['operacion'] == 'listRaces') {
+    $result = $mascota->listRaces();
+    echo json_encode($result);
+  }
 }

@@ -61,4 +61,15 @@ class Mascota extends Conexion
       die($e->getMessage());
     }
   }
+
+  public function listRaces()
+  {
+    try {
+      $query = $this->connection->prepare("CALL spu_razas_listar()");
+      $query->execute();
+      return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
 }

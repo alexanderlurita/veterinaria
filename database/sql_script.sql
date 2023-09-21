@@ -32,7 +32,7 @@ CREATE TABLE mascotas
 	idmascota		INT AUTO_INCREMENT PRIMARY KEY,
 	idcliente		INT 				NOT NULL,
 	idraza			INT 				NOT NULL,
-	nombre			VARCHAR(20)		NOT NULL,
+	nombre			VARCHAR(30)		NOT NULL,
 	fotografia		VARCHAR(100)	NULL,
 	color				VARCHAR(30)		NOT NULL,
 	genero			CHAR(1)			NOT NULL,
@@ -140,6 +140,15 @@ BEGIN
 	SELECT *
 		FROM clientes
 		WHERE dni = _dni;
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE spu_razas_listar()
+BEGIN
+	SELECT 	razas.idraza,
+					CONCAT(animales.nombreanimal, ' - ', razas.nombreraza) AS 'animalraza'
+		FROM razas
+		INNER JOIN animales ON animales.idanimal = razas.idanimal;
 END $$
 
 /*
