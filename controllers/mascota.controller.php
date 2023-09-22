@@ -11,7 +11,7 @@ if (isset($_POST['operacion'])) {
     $uploadedFileName = "";
     $uploadFilePath = "";
 
-    if ($_POST['fotografia'] != ""){
+    if ($_POST['fotografia'] != "") {
       $uploadDirectory = "../images/uploads/";
       $uploadedFileName = sha1(date('c')) . '.jpg';
       $uploadFilePath = $uploadDirectory . $uploadedFileName;
@@ -41,7 +41,6 @@ if (isset($_GET['operacion'])) {
 
   if ($_GET['operacion'] == 'search') {
     $result = $mascota->searchPet($_GET['idmascota']);
-
     echo json_encode($result);
   }
 

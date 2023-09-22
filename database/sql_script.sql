@@ -6,10 +6,10 @@ USE veterinariadb;
 
 CREATE TABLE clientes
 (
-	idcliente		INT AUTO_INCREMENT PRIMARY KEY,
+	idcliente			INT AUTO_INCREMENT PRIMARY KEY,
 	apellidos 		VARCHAR(50)		NOT NULL,
-	nombres			VARCHAR(50)		NOT NULL,
-	dni				CHAR(8) 			NOT NULL,
+	nombres				VARCHAR(50)		NOT NULL,
+	dni						CHAR(8) 			NOT NULL,
 	claveacceso		VARCHAR(200)	NOT NULL
 ) ENGINE = INNODB;
 
@@ -21,7 +21,7 @@ CREATE TABLE animales
 
 CREATE TABLE razas
 (
-	idraza			INT AUTO_INCREMENT PRIMARY KEY,
+	idraza				INT AUTO_INCREMENT PRIMARY KEY,
 	idanimal			INT 				NOT NULL,
 	nombreraza		VARCHAR(30)		NOT NULL,
 	CONSTRAINT fk_idanimal_razas FOREIGN KEY (idanimal) REFERENCES animales (idanimal)
@@ -29,17 +29,19 @@ CREATE TABLE razas
 
 CREATE TABLE mascotas
 (
-	idmascota		INT AUTO_INCREMENT PRIMARY KEY,
-	idcliente		INT 				NOT NULL,
-	idraza			INT 				NOT NULL,
-	nombre			VARCHAR(30)		NOT NULL,
+	idmascota			INT AUTO_INCREMENT PRIMARY KEY,
+	idcliente			INT 				NOT NULL,
+	idraza				INT 				NOT NULL,
+	nombre				VARCHAR(30)		NOT NULL,
 	fotografia		VARCHAR(100)	NULL,
-	color				VARCHAR(30)		NOT NULL,
-	genero			CHAR(1)			NOT NULL,
+	color					VARCHAR(30)		NOT NULL,
+	genero				CHAR(1)			NOT NULL,
 	CONSTRAINT fk_idcliente_mascotas FOREIGN KEY (idcliente) REFERENCES clientes (idcliente),
 	CONSTRAINT fk_idraza_mascotas FOREIGN KEY (idraza) REFERENCES razas (idraza)
 ) ENGINE = INNODB;
 
+
+-- INSERCCIONES DE PRUEBA A LAS TABLAS
 INSERT INTO clientes (apellidos, nombres, dni, claveacceso) VALUES
 	('Lurita', 'Alexander', '73790885', '$2y$10$U1S.7fB0CNrdIeH4L7kTaeiNa2vdiFfR8P1UJSzSnCjIVyVkEFGSi'),
 	('Perez', 'Fernanda', '21304010', '$2y$10$ZkFhCk.PMnzU/XqW5Y97EuMXIyvr5SAWt86u9y0WdOp/7GEloCrFi'),
@@ -65,13 +67,13 @@ INSERT INTO mascotas (idcliente, idraza, nombre, fotografia, color, genero) VALU
 		(3, 5, 'Sandy', 'ec6c78386f3147d199e1af1a4566e3529a4dea5f.jpg', 'Negro y gris claro', 'M');
 		
 	
--- PROCEDIMIENTOS
+-- PROCEDIMIENTOS ALMACENADOS
 DELIMITER $$
 CREATE PROCEDURE spu_clientes_registrar
 (
-	IN _apellidos 		VARCHAR(50),
+	IN _apellidos 	VARCHAR(50),
 	IN _nombres			VARCHAR(50),	
-	IN _dni				CHAR(8), 		
+	IN _dni					CHAR(8), 		
 	IN _claveacceso	VARCHAR(200)
 )
 BEGIN
@@ -85,8 +87,8 @@ CREATE PROCEDURE spu_mascotas_registrar
 	IN _idcliente		INT,
 	IN _idraza			INT,
 	IN _nombre			VARCHAR(20),
-	IN _fotografia		VARCHAR(100),
-	IN _color			VARCHAR(30),
+	IN _fotografia	VARCHAR(100),
+	IN _color				VARCHAR(30),
 	IN _genero			CHAR(1)
 )
 BEGIN
@@ -108,8 +110,8 @@ DELIMITER $$
 CREATE PROCEDURE spu_mascotas_buscar_cliente(IN _dni CHAR(8))
 BEGIN
 	SELECT 	mascotas.idmascota,
-				animales.nombreanimal,
-				mascotas.nombre
+					animales.nombreanimal AS 'tipo',
+					mascotas.nombre
 		FROM mascotas
 		INNER JOIN razas ON razas.idraza = mascotas.idraza
 		INNER JOIN animales ON animales.idanimal = razas.idanimal
@@ -121,12 +123,12 @@ DELIMITER $$
 CREATE PROCEDURE spu_mascotas_buscar(IN _idmascota INT)
 BEGIN
 	SELECT 	mascotas.idmascota,
-				mascotas.nombre,
-				animales.nombreanimal 'animal',
-				razas.nombreraza 'raza',
-				mascotas.fotografia,
-				mascotas.color,
-				mascotas.genero
+					mascotas.nombre,
+					animales.nombreanimal 'animal',
+					razas.nombreraza 'raza',
+					mascotas.fotografia,
+					mascotas.color,
+					mascotas.genero
 			FROM mascotas
 			INNER JOIN razas ON razas.idraza = mascotas.idraza
 			INNER JOIN animales ON animales.idanimal = razas.idanimal
