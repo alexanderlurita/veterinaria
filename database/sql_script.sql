@@ -42,6 +42,7 @@ CREATE TABLE mascotas
 
 
 -- INSERCCIONES DE PRUEBA A LAS TABLAS
+-- TODAS LAS CLAVES SON: 12345
 INSERT INTO clientes (apellidos, nombres, dni, claveacceso) VALUES
 	('Lurita', 'Alexander', '73790885', '$2y$10$U1S.7fB0CNrdIeH4L7kTaeiNa2vdiFfR8P1UJSzSnCjIVyVkEFGSi'),
 	('Perez', 'Fernanda', '21304010', '$2y$10$ZkFhCk.PMnzU/XqW5Y97EuMXIyvr5SAWt86u9y0WdOp/7GEloCrFi'),
