@@ -53,18 +53,25 @@ INSERT INTO animales (nombreanimal) VALUES
 	('Hámster');
 
 INSERT INTO razas (idanimal, nombreraza) VALUES
-	(1, 'Bulldog'),
+	(1, 'Bulldog Fránces'),
 	(1, 'Dalmata'),
+	(1, 'Pastor Alemán'),
+	(1, 'Golden Retriever'),
+	(1, 'Labrador Retriever'),
 	(2, 'Azul ruso'),
+	(2, 'Persa'),
 	(2, 'Siamés'),
-	(3, 'Ruso'),
-	(3, 'Roborowski');
+	(2, 'Bengal'),
+	(2, 'Ragdoll'),
+	(3, 'Enano Ruso'),
+	(3, 'Roborowski'),
+	(3, 'Sirio');
 	
 INSERT INTO mascotas (idcliente, idraza, nombre, fotografia, color, genero) VALUES
 		(1, 2, 'Firulais', '0c8e0a697916ff0e283f6cb58e2091a3a4d4df0a.jpg', 'Blanco y negro', 'M'),
-		(1, 4, 'Daisy', '95b3a8a802b8e0db8611d3ec2b994a37486c2584.jpg', 'Blanco y marrón oscuro', 'H'),
-		(2, 3, 'Loki', 'cb4d12e5d8ef3e76d761b82f31fe9f90c3b592a8.jpg', 'Gris claro', 'M'),
-		(3, 5, 'Sandy', 'ec6c78386f3147d199e1af1a4566e3529a4dea5f.jpg', 'Negro y gris claro', 'M');
+		(1, 8, 'Daisy', '95b3a8a802b8e0db8611d3ec2b994a37486c2584.jpg', 'Blanco y marrón oscuro', 'H'),
+		(2, 6, 'Loki', 'cb4d12e5d8ef3e76d761b82f31fe9f90c3b592a8.jpg', 'Gris claro', 'M'),
+		(3, 12, 'Sandy', 'ec6c78386f3147d199e1af1a4566e3529a4dea5f.jpg', 'Negro y gris claro', 'M');
 		
 	
 -- PROCEDIMIENTOS ALMACENADOS
@@ -150,7 +157,8 @@ BEGIN
 	SELECT 	razas.idraza,
 					CONCAT(animales.nombreanimal, ' - ', razas.nombreraza) AS 'animalraza'
 		FROM razas
-		INNER JOIN animales ON animales.idanimal = razas.idanimal;
+		INNER JOIN animales ON animales.idanimal = razas.idanimal
+		ORDER BY 2;
 END $$
 
 /*
