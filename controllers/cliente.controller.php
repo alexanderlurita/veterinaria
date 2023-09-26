@@ -8,21 +8,28 @@ $cliente = new Cliente();
 if (isset($_POST['operacion'])) {
 
   if ($_POST['operacion'] == 'add') {
-    $claveEncriptada = encrypt($_POST['claveacceso']);
+    if ($_POST['claveacceso'] != '') {
+      $claveEncriptada = encrypt($_POST['claveacceso']);
 
-    $data = [
-      "apellidos"     => $_POST['apellidos'],
-      "nombres"       => $_POST['nombres'],
-      "dni"           => $_POST['dni'],
-      "claveacceso"   => $claveEncriptada
-    ];
-    $cliente->create($data);
+      $data = [
+        "apellidos"     => $_POST['apellidos'],
+        "nombres"       => $_POST['nombres'],
+        "dni"           => $_POST['dni'],
+        "claveacceso"   => $claveEncriptada
+      ];
+      $result = $cliente->create($data);
+      echo json_encode($result);
+    } else {
+      echo json_encode(-1);
+    }
   }
 
   if ($_POST['operacion'] == 'login') {
     $response = [
       "login"       => false,
       "idcliente"   => "",
+      "dni"         => "",  
+      "tipocliente" => "",
       "apellidos"   => "",
       "nombres"     => ""
     ];
@@ -35,6 +42,8 @@ if (isset($_POST['operacion'])) {
       $response['idcliente'] = $result['idcliente'];
       $response['apellidos'] = $result['apellidos'];
       $response['nombres'] = $result['nombres'];
+      $response['dni'] = $result['dni'];
+      $response['tipocliente'] = $result['tipocliente'];
     } else {
       $response['message'] = 'Credenciales inválidas';
     }

@@ -23,6 +23,7 @@ class Cliente extends Conexion
           $data['claveacceso']
         )
       );
+      return $query->fetch(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
       die($e->getMessage());
     }
